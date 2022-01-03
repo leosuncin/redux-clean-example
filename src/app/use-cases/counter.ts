@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppThunk, AppState } from '../store';
+import { AppThunk, AppState, AsyncThunkConfig } from '../store';
 
 export interface CounterState {
   value: number;
@@ -25,17 +25,17 @@ export const { reducer, actions, name } = createSlice({
     incrementByAmount(state, action: PayloadAction<number>) {
       state.value += action.payload;
     },
-    incrementAsyncStarted(state) {
+  },
+  extraReducers(builder) {
+    builder.addCase(thunks.incrementAsync.pending, (state) => {
       state.status = 'loading';
-    },
-    incrementAsyncCompleted(state, action: PayloadAction<number>) {
+    }).addCase(thunks.incrementAsync.fulfilled, (state, action) => {
       state.status = 'idle';
       state.value += action.payload;
-    },
-    incrementAsyncFailed(state) {
+    }).addCase(thunks.incrementAsync.rejected, (state) => {
       state.status = 'failed';
-    },
-  },
+    })
+  }
 });
 
 export const selectors = {
@@ -43,19 +43,11 @@ export const selectors = {
 };
 
 export const thunks = {
-  incrementAsync(amount: number): AppThunk {
-    return async (dispatch, _, thunkExtraArgument) => {
-      try {
-        dispatch(actions.incrementAsyncStarted);
+  incrementAsync: createAsyncThunk<number, number, AsyncThunkConfig>('counter/fetchCount', async (amount: number, { extra }) => {
+    const { data } = await extra.counterApi.fetchCount(amount);
 
-        const { data } = await thunkExtraArgument.counterApi.fetchCount(amount);
-
-        dispatch(actions.incrementAsyncCompleted(data));
-      } catch (error) {
-        dispatch(actions.incrementAsyncFailed());
-      }
-    };
-  },
+    return data;
+  }),
   incrementIfOdd(amount: number): AppThunk {
     return (dispatch, getState) => {
       const currentValue = selectors.count(getState());

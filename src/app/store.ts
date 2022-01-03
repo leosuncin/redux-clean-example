@@ -65,3 +65,9 @@ export type AppThunk<RtnType = void | Promise<void>> = GenericThunkAction<
   ThunksExtraArgument,
   Action<string>
 >;
+
+export type AsyncThunkConfig = {
+  state: AppState;
+  dispatch: AppDispatch;
+  extra: ThunksExtraArgument;
+}
