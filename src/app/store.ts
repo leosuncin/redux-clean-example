@@ -4,7 +4,6 @@ import {
   ThunkAction as GenericThunkAction,
 } from '@reduxjs/toolkit';
 import {
-  createMiddlewareEvtActionFactory,
   usecasesToAutoDispatchThunks,
   usecasesToReducer,
   usecasesToSelectors,
@@ -16,34 +15,23 @@ import * as counterUseCase from './use-cases/counter';
 
 export const useCases = [counterUseCase];
 
-const { createMiddlewareEvtAction } = createMiddlewareEvtActionFactory(
-  useCases
-);
-
 export type ThunksExtraArgument = {
   counterApi: CounterApi;
-  evtAction: ReturnType<typeof createMiddlewareEvtAction>['evtAction'];
 };
 
 export function createStore() {
   const [counterApi] = [createCounter()];
 
-  const { evtAction, middlewareEvtAction } = createMiddlewareEvtAction();
-
   const store = configureStore({
     reducer: usecasesToReducer(useCases),
     middleware: (getDefaultMiddleware) =>
-      [
-        ...getDefaultMiddleware({
+      getDefaultMiddleware({
           thunk: {
             extraArgument: {
-              counterApi,
-              evtAction,
+              counterApi
             },
           },
-        }),
-        middlewareEvtAction,
-      ] as const,
+        })
   });
 
   return store;
