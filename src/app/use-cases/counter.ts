@@ -43,7 +43,7 @@ export const selectors = {
 };
 
 export const thunks = {
-  incrementAsync: createAsyncThunk<number, number, AsyncThunkConfig>(`${name}/incrementAsync`, async (amount: number, { extra }) => {
+  incrementAsync: createAsyncThunk<number, number, AsyncThunkConfig>(`${name}/incrementAsync`, async (amount, { extra }) => {
     const { data } = await extra.counterApi.fetchCount(amount);
 
     return data;
