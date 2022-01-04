@@ -12,8 +12,9 @@ import {
 import type { CounterApi } from './ports/counter';
 import { createCounter } from './secondary-adapters/createCounter';
 import * as counterUseCase from './use-cases/counter';
+import * as todomvcUseCase from './use-cases/todomvc';
 
-export const useCases = [counterUseCase];
+export const useCases = [counterUseCase, todomvcUseCase];
 
 export type ThunksExtraArgument = {
   counterApi: CounterApi;
@@ -26,12 +27,12 @@ export function createStore() {
     reducer: usecasesToReducer(useCases),
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
-          thunk: {
-            extraArgument: {
-              counterApi
-            },
+        thunk: {
+          extraArgument: {
+            counterApi,
           },
-        })
+        },
+      }),
   });
 
   return store;
@@ -58,4 +59,4 @@ export type AsyncThunkConfig = {
   state: AppState;
   dispatch: AppDispatch;
   extra: ThunksExtraArgument;
-}
+};

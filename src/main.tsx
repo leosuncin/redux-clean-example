@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import './index.css';
-import App from './ui/counter';
+import App from './ui/todomvc';
 import { createStore } from './app/store';
 
 const store = createStore();

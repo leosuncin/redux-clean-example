@@ -6,19 +6,25 @@ specifiers:
   '@types/react-dom': ^17.0.10
   '@types/react-redux': ^7.1.21
   '@vitejs/plugin-react': ^1.0.7
+  classnames: ^2.3.1
   clean-redux: ^0.3.4
   react: ^17.0.2
   react-dom: ^17.0.2
   react-redux: ^7.2.6
+  todomvc-app-css: ^2.4.1
+  todomvc-common: ^1.0.5
   typescript: ^4.4.4
   vite: ^2.7.2
 
 dependencies:
   '@reduxjs/toolkit': 1.7.1_react-redux@7.2.6+react@17.0.2
+  classnames: 2.3.1
   clean-redux: 0.3.4_@reduxjs+toolkit@1.7.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+  todomvc-app-css: 2.4.1
+  todomvc-common: 1.0.5
 
 devDependencies:
   '@types/react': 17.0.38
@@ -529,6 +535,13 @@ packages:
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
     dev: true
+
+  /classnames/2.3.1:
+    resolution:
+      {
+        integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==,
+      }
+    dev: false
 
   /clean-redux/0.3.4_@reduxjs+toolkit@1.7.1:
     resolution:
@@ -1220,6 +1233,20 @@ packages:
     resolution: { integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4= }
     engines: { node: '>=4' }
     dev: true
+
+  /todomvc-app-css/2.4.1:
+    resolution:
+      {
+        integrity: sha512-1mZYRG435VmqIw1WahBYhAJbyfH4HnRNI8EgF4ypK4R1RjwgBBvXd0N57ZwCa1lbHzYBraA6+dVyAg3GAPEACQ==,
+      }
+    dev: false
+
+  /todomvc-common/1.0.5:
+    resolution:
+      {
+        integrity: sha512-D8kEJmxVMQIWwztEdH+WeiAfXRbbSCpgXq4NkYi+gduJ2tr8CNq7sYLfJvjpQ10KD9QxJwig57rvMbV2QAESwQ==,
+      }
+    dev: false
 
   /tsafe/0.4.1:
     resolution:
