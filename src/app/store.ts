@@ -23,14 +23,16 @@ export type ThunksExtraArgument = {
 export function createStore() {
   const [counterApi] = [createCounter()];
 
+  const extraArgument: ThunksExtraArgument = {
+    counterApi,
+  };
+
   const store = configureStore({
     reducer: usecasesToReducer(useCases),
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         thunk: {
-          extraArgument: {
-            counterApi,
-          },
+          extraArgument
         },
       }),
   });
