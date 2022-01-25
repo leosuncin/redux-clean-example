@@ -9,7 +9,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "classnames": "^2.3.1",
-    "clean-redux": "^0.3.4",
+    "redux-clean-architecture": "^1.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
