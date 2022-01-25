@@ -7,7 +7,7 @@ import {
   usecasesToAutoDispatchThunks,
   usecasesToReducer,
   usecasesToSelectors,
-} from 'clean-redux';
+} from 'redux-clean-architecture';
 
 import type { CounterApi } from './ports/counter';
 import { createCounter } from './secondary-adapters/createCounter';
