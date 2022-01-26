@@ -3,30 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "api": "json-server --port 4000 --static dist db.json"
+    "dev": "pnpm run --recursive --parallel dev",
+    "build": "pnpm run --recursive --parallel build",
+    "preview": "pnpm run --recursive --parallel preview"
   },
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.7.1",
-    "classnames": "^2.3.1",
-    "json-server": "^0.17.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6",
-    "redux-clean-architecture": "^1.0.2",
-    "todomvc-app-css": "^2.4.1",
-    "todomvc-common": "^1.0.5",
-    "vite-plugin-mix": "^0.3.1"
-  },
-  "devDependencies": {
-    "@types/json-server": "^0.14.4",
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
-    "@types/react-redux": "^7.1.21",
-    "@vitejs/plugin-react": "^1.0.7",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
