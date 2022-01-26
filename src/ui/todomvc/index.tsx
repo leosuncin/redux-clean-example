@@ -7,7 +7,7 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { TodoList } from './TodoList';
 
-export const TodoMvc = () => {
+export const TodoMvcPage = () => {
   const { counter } = useAppSelector(selectors.todomvc.counter);
   const { todomvcThunks } = useAppThunks();
   const showTodoList = counter.allCount > 0;

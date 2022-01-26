@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { TodoMvc } from './ui/todomvc';
+import { TodoMvcPage } from './ui/todomvc';
 import { CounterPage } from "./ui/counter";
 import { createStore } from './app/store';
 
@@ -13,7 +13,7 @@ const store = createStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <TodoMvc />
+      <TodoMvcPage />
       <CounterPage />
     </Provider>
   </React.StrictMode>,
