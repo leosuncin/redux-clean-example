@@ -6,11 +6,11 @@
 
 Examples:
 
-**TodoMVC**
+[**TodoMVC**](examples/todomvc)
 
 ![screenshot of TodoMVC example](./examples/todomvc/screenshot.png)
 
-**Counter**
+[**Counter**](examples/counter)
 
 ![screenshot of counter example](./examples/counter/screenshot.png)
 
@@ -34,7 +34,7 @@ Install dependencies
   pnpm install
 ```
 
-Start the server
+Start all the examples
 
 ```bash
   pnpm dev
