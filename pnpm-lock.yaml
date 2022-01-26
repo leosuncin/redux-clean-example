@@ -68,6 +68,41 @@ importers:
       typescript: 4.5.5
       vite: 2.7.13
 
+  examples/todomvc:
+    specifiers:
+      '@reduxjs/toolkit': ^1.7.1
+      '@types/react': ^17.0.38
+      '@types/react-dom': ^17.0.11
+      '@types/react-redux': ^7.1.22
+      '@vitejs/plugin-react': ^1.1.4
+      classnames: ^2.3.1
+      json-server: ^0.17.0
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      react-redux: ^7.2.6
+      redux-clean-architecture: ^1.0.3
+      todomvc-app-css: ^2.4.1
+      todomvc-common: ^1.0.5
+      typescript: ^4.5.5
+      vite: ^2.7.13
+    dependencies:
+      '@reduxjs/toolkit': 1.7.1_react-redux@7.2.6+react@17.0.2
+      classnames: 2.3.1
+      json-server: 0.17.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+      redux-clean-architecture: 1.0.3_@reduxjs+toolkit@1.7.1
+      todomvc-app-css: 2.4.1
+      todomvc-common: 1.0.5
+    devDependencies:
+      '@types/react': 17.0.38
+      '@types/react-dom': 17.0.11
+      '@types/react-redux': 7.1.22
+      '@vitejs/plugin-react': 1.1.4
+      typescript: 4.5.5
+      vite: 2.7.13
+
 packages:
 
   /@babel/code-frame/7.16.7:

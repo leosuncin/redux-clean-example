@@ -1,0 +1,29 @@
+{
+  "name": "todomvc-example",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "api": "json-server --port 4000 --static dist db.json"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
+    "classnames": "^2.3.1",
+    "json-server": "^0.17.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "redux-clean-architecture": "^1.0.3",
+    "todomvc-app-css": "^2.4.1",
+    "todomvc-common": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.22",
+    "@vitejs/plugin-react": "^1.1.4",
+    "typescript": "^4.5.5",
+    "vite": "^2.7.13"
+  }
+}
