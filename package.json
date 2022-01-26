@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "api": "json-server --static dist --watch db.json"
+    "api": "json-server --port 4000 --static dist db.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",

@@ -10,7 +10,9 @@ import {
 } from 'redux-clean-architecture';
 
 import type { CounterApi } from './ports/counter';
+import type { TodoApi } from './ports/todomvc';
 import { createCounter } from './secondary-adapters/createCounter';
+import { createTodoApi } from './secondary-adapters/createTodoApi';
 import * as counterUseCase from './use-cases/counter';
 import * as todomvcUseCase from './use-cases/todomvc';
 
@@ -18,13 +20,18 @@ export const useCases = [counterUseCase, todomvcUseCase];
 
 export type ThunksExtraArgument = {
   counterApi: CounterApi;
+  todoApi: TodoApi;
 };
 
 export function createStore() {
-  const [counterApi] = [createCounter()];
+  const [counterApi, todoApi] = [
+    createCounter(),
+    createTodoApi(import.meta.env.VITE_BASE_API ?? 'http://localhost:4000'),
+  ];
 
   const extraArgument: ThunksExtraArgument = {
     counterApi,
+    todoApi,
   };
 
   const store = configureStore({
@@ -32,7 +39,7 @@ export function createStore() {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         thunk: {
-          extraArgument
+          extraArgument,
         },
       }),
   });
