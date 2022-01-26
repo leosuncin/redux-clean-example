@@ -3,11 +3,11 @@ import './TodoMvc.css';
 import { useEffect } from 'react';
 
 import { selectors, useAppSelector, useAppThunks } from '../hooks';
-import Footer from './Footer';
-import Header from './Header';
-import TodoList from './TodoList';
+import { Footer } from './Footer';
+import { Header } from './Header';
+import { TodoList } from './TodoList';
 
-const TodoMvc = () => {
+export const TodoMvc = () => {
   const { counter } = useAppSelector(selectors.todomvc.counter);
   const { todomvcThunks } = useAppThunks();
   const showTodoList = counter.allCount > 0;
@@ -15,6 +15,8 @@ const TodoMvc = () => {
 
   useEffect(() => {
     const promise = todomvcThunks.fetchTodoList();
+
+    console.log(promise);
 
     return () => {
       promise.abort();
@@ -29,5 +31,3 @@ const TodoMvc = () => {
     </div>
   );
 };
-
-export default TodoMvc;

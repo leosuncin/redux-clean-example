@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import App from './ui/counter';
+import { CounterPage } from './ui/counter';
 import { createStore } from './app/store';
 
 const store = createStore();
@@ -10,7 +10,7 @@ const store = createStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <CounterPage />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

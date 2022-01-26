@@ -7,7 +7,7 @@ export function pluralize(count: number, word: string): string {
   return count === 1 ? word : word + 's';
 }
 
-function Footer() {
+export function Footer() {
   const { counter } = useAppSelector(selectors.todomvc.counter);
   const { filter } = useAppSelector(selectors.todomvc.filter);
   const { todomvcThunks } = useAppThunks();
@@ -83,4 +83,3 @@ function Footer() {
   );
 }
 
-export default Footer;

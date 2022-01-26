@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { Todo, TodoId } from '../../app/ports/todomvc';
 import { selectors, useAppSelector, useAppThunks } from '../hooks';
-import TodoItem from './TodoItem';
+import { TodoItem } from './TodoItem';
 
-const TodoList = () => {
+export const TodoList = () => {
   const [editing, setEditing] = useState<TodoId | null>(null);
   const { todos } = useAppSelector(selectors.todomvc.todos);
   const { counter } = useAppSelector(selectors.todomvc.counter);
@@ -60,5 +60,3 @@ const TodoList = () => {
     </section>
   );
 };
-
-export default TodoList;

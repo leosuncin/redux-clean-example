@@ -13,7 +13,7 @@ export interface TodoItemProps {
   onToggle(todoId: TodoId): void;
 }
 
-const TodoItem = ({
+export const TodoItem = ({
   editing,
   todo,
   onCancel,
@@ -91,4 +91,3 @@ const TodoItem = ({
   );
 };
 
-export default TodoItem;

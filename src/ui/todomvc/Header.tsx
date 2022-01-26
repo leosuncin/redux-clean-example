@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useAppThunks } from '../hooks';
 
-function Header() {
+export function Header() {
   const [newTodo, setNewTodo] = useState<string>('');
   const { todomvcThunks } = useAppThunks();
 
@@ -41,4 +41,3 @@ function Header() {
   );
 }
 
-export default Header;

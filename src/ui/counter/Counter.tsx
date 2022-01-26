@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAppSelector, useAppThunks, selectors } from '../hooks';
 import styles from './Counter.module.css';
 
-function Counter() {
+export function Counter() {
   const { count } = useAppSelector(selectors.counter.count);
   const { counterThunks } = useAppThunks();
   const [incrementAmount, setIncrementAmount] = useState('2');
@@ -58,5 +58,3 @@ function Counter() {
     </>
   );
 }
-
-export default Counter;

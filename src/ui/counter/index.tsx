@@ -1,8 +1,8 @@
 import './App.css';
 import logo from './logo.svg';
-import Counter from './Counter';
+import { Counter } from './Counter';
 
-const CounterPage = () => {
+export const CounterPage = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -53,5 +53,3 @@ const CounterPage = () => {
     </div>
   );
 };
-
-export default CounterPage;
