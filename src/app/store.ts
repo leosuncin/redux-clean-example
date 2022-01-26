@@ -23,15 +23,17 @@ export type ThunksExtraArgument = {
   todoApi: TodoApi;
 };
 
-export function createStore() {
+export function createStore(params: {
+  baseApi: string;
+}) {
+
+  const { baseApi } = params;
 
   //NOTE: Adapter initialization could very well be async.
   //In this case await Promise.all([...]);
   const [counterApi, todoApi] = [
     createCounter(),
-    createTodoApi({
-      baseApi: import.meta.env.VITE_BASE_API ?? 'http://localhost:3000/api'
-    })
+    createTodoApi({ baseApi })
   ];
 
   const extraArgument: ThunksExtraArgument = {
