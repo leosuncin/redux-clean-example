@@ -12,7 +12,7 @@ Examples:
 
 **Counter**
 
-![screenshot of counter example](./images/counter-screenshot.png)
+![screenshot of counter example](./examples/counter/screenshot.png)
 
 ## Run Locally
 
