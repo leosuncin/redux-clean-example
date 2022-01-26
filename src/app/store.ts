@@ -26,7 +26,7 @@ export type ThunksExtraArgument = {
 export function createStore() {
   const [counterApi, todoApi] = [
     createCounter(),
-    createTodoApi(import.meta.env.VITE_BASE_API ?? 'http://localhost:4000'),
+    createTodoApi(import.meta.env.VITE_BASE_API ?? 'http://localhost:3000/api'),
   ];
 
   const extraArgument: ThunksExtraArgument = {

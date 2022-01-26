@@ -1,0 +1,14 @@
+{
+  "todo": [
+    {
+      "title": "Learn @redux/toolkit",
+      "completed": true,
+      "id": 1
+    },
+    {
+      "title": "Give redux-clean-architecture a try",
+      "completed": false,
+      "id": 2
+    }
+  ]
+}

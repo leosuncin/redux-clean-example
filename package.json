@@ -16,7 +16,8 @@
     "react-redux": "^7.2.6",
     "redux-clean-architecture": "^1.0.2",
     "todomvc-app-css": "^2.4.1",
-    "todomvc-common": "^1.0.5"
+    "todomvc-common": "^1.0.5",
+    "vite-plugin-mix": "^0.3.1"
   },
   "devDependencies": {
     "@types/json-server": "^0.14.4",
