@@ -8,7 +8,7 @@ Examples:
 
 **TodoMVC**
 
-![screenshot of TodoMVC example](./images/todomvc-screenshot.png)
+![screenshot of TodoMVC example](./examples/todomvc/screenshot.png)
 
 **Counter**
 
