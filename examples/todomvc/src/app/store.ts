@@ -10,7 +10,10 @@ import {
 } from 'redux-clean-architecture';
 
 import type { TodoApi } from './ports/todomvc';
-import { createTodoApi } from './secondary-adapters/createTodoApi';
+import {
+  createTodoApi,
+  CreateTodoApiParams,
+} from './secondary-adapters/createTodoApi';
 import * as todomvcUseCase from './use-cases/todomvc';
 
 export const useCases = [todomvcUseCase];
@@ -19,8 +22,12 @@ export type ThunksExtraArgument = {
   todoApi: TodoApi;
 };
 
-export function createStore() {
-  const todoApi = createTodoApi(import.meta.env.VITE_BASE_API ?? 'http://localhost:4000');
+export type CreateStoreParams = {
+  [todomvcUseCase.name]: CreateTodoApiParams;
+};
+
+export function createStore(config: CreateStoreParams) {
+  const todoApi = createTodoApi(config.todomvc);
 
   const extraArgument: ThunksExtraArgument = {
     todoApi,
