@@ -55,6 +55,33 @@ importers:
       vite: 2.7.13
       vitest: 0.2.5_c8@7.11.0
 
+  examples/realworld:
+    specifiers:
+      '@reduxjs/toolkit': ^1.7.1
+      '@types/react': ^17.0.38
+      '@types/react-dom': ^17.0.11
+      '@types/react-redux': ^7.1.22
+      '@vitejs/plugin-react': ^1.1.4
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      react-redux: ^7.2.6
+      redux-clean-architecture: ^1.0.3
+      typescript: ^4.5.5
+      vite: ^2.7.13
+    dependencies:
+      '@reduxjs/toolkit': 1.7.1_react-redux@7.2.6+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+      redux-clean-architecture: 1.0.3_@reduxjs+toolkit@1.7.1
+    devDependencies:
+      '@types/react': 17.0.38
+      '@types/react-dom': 17.0.11
+      '@types/react-redux': 7.1.22
+      '@vitejs/plugin-react': 1.1.4
+      typescript: 4.5.5
+      vite: 2.7.13
+
   examples/todomvc:
     specifiers:
       '@faker-js/faker': ^6.0.0-alpha.5
