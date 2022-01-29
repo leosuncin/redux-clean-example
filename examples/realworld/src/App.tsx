@@ -1,8 +1,10 @@
+import { Routes, Route } from 'react-router-dom';
+
 function App() {
   return (
-    <div>
-      <h1>Conduit - Real World</h1>
-    </div>
+    <Routes>
+      <Route index element={<h1>Conduit - Real World</h1>} />
+    </Routes>
   );
 }
 
