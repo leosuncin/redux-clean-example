@@ -3,22 +3,37 @@ import {
   type ThunkAction,
   configureStore,
 } from '@reduxjs/toolkit';
+import type { KyInstance } from 'ky/distribution/types/ky';
 import {
   usecasesToAutoDispatchThunks,
   usecasesToReducer,
   usecasesToSelectors,
 } from 'redux-clean-architecture';
 
-export const useCases = [];
+/* eslint-disable import/no-namespace */
+import type { AuthApi } from '~/app/ports/auth';
+import { createAuthApi } from '~/app/secondary-adapters/createAuth';
+import * as authUseCase from '~/app/use-cases/auth';
+/* eslint-enable import/no-namespace */
 
-export type ThunksExtraArgument = {};
+export const useCases = [authUseCase];
 
-export type CreateStoreParams = {};
+export type ThunksExtraArgument = {
+  [authUseCase.name]: AuthApi;
+};
 
-export function createStore(config: CreateStoreParams) {
-  const extraArgument: ThunksExtraArgument = {};
+export type CreateStoreParams = {
+  client: KyInstance;
+};
 
-  const store = configureStore({
+export function createStore({ client }: CreateStoreParams) {
+  const authApi = createAuthApi({ client });
+
+  const extraArgument: ThunksExtraArgument = {
+    [authUseCase.name]: authApi,
+  };
+
+  return configureStore({
     reducer: usecasesToReducer(useCases),
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -27,8 +42,6 @@ export function createStore(config: CreateStoreParams) {
         },
       }),
   });
-
-  return store;
 }
 
 export const selectors = usecasesToSelectors(useCases);

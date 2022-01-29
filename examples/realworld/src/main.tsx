@@ -5,8 +5,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from '~/App';
 import { createStore } from '~/app/store';
+import { client } from '~/utils/client';
 
-const store = createStore({});
+const store = createStore({ client });
 
 render(
   <StrictMode>
