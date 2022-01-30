@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import type { Register } from '~/app/ports/auth';
+import type { Login, Register } from '~/app/ports/auth';
 import { db } from '~/utils/mocks/db';
 
 function generateToken(username: string): string {
@@ -53,6 +53,34 @@ export const registerHandler = rest.post<{ user: Register }>(
         context.delay()
       );
     }
+
+    return response(
+      context.json({ user: { ...user, token } }),
+      context.delay()
+    );
+  }
+);
+
+export const loginHandler = rest.post<{ user: Login }>(
+  `${import.meta.env.VITE_BACKEND_URL}/users/login`,
+  (request, response, context) => {
+    const user = db.user.findFirst({
+      where: { email: { equals: request.body.user.email } },
+    });
+
+    if (!user || request.body.user.password !== 'Pa$$w0rd!') {
+      return response(
+        context.status(422),
+        context.json({
+          errors: {
+            'email or password': ['is invalid'],
+          },
+        }),
+        context.delay()
+      );
+    }
+
+    const token = generateToken(user.username);
 
     return response(
       context.json({ user: { ...user, token } }),
