@@ -15,6 +15,7 @@ import type { AuthApi } from '~/app/ports/auth';
 import { createAuthApi } from '~/app/secondary-adapters/createAuth';
 import * as authUseCase from '~/app/use-cases/auth';
 /* eslint-enable import/no-namespace */
+import type { SerializedValidationError } from '~/utils/serializeError';
 
 export const useCases = [authUseCase];
 
@@ -65,4 +66,5 @@ export type AsyncThunkConfig = {
   state: AppState;
   dispatch: AppDispatch;
   extra: ThunksExtraArgument;
+  serializedErrorType: SerializedValidationError;
 };

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { rest } from 'msw';
 
 import type { Login, Register } from '~/app/ports/auth';
@@ -10,9 +11,13 @@ function generateToken(username: string): string {
 export const registerHandler = rest.post<{ user: Register }>(
   `${import.meta.env.VITE_BACKEND_URL}/users`,
   (request, response, context) => {
-    const user = db.user.create(request.body.user);
-    const token = generateToken(user.username);
-    const errors: Record<string, string[]> = {};
+    const countUsername = db.user.count({
+      where: { username: { equals: request.body.user.username } },
+    });
+    const countEmail = db.user.count({
+      where: { email: { equals: request.body.user.email } },
+    });
+    const errors: Partial<Record<keyof Register, string[]>> = {};
 
     if (!request.body.user.email) {
       errors.email = ["can't be blank"];
@@ -20,6 +25,10 @@ export const registerHandler = rest.post<{ user: Register }>(
 
     if (!request.body.user.email.includes('@')) {
       errors.email = ['is invalid'];
+    }
+
+    if (countEmail > 0) {
+      errors.email = ['has already been taken'];
     }
 
     if (!request.body.user.password) {
@@ -45,6 +54,13 @@ export const registerHandler = rest.post<{ user: Register }>(
     if (request.body.user.username.length > 20) {
       errors.username = ['is too long (maximum is 20 characters)'];
     }
+
+    if (countUsername > 0) {
+      errors.username = ['has already been taken'];
+    }
+
+    const user = db.user.create(request.body.user);
+    const token = generateToken(user.username);
 
     if (Object.keys(errors).length > 0) {
       return response(

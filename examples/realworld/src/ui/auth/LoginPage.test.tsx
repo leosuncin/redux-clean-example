@@ -5,10 +5,10 @@ import { setupServer } from 'msw/node';
 
 import type { Login } from '~/app/ports/auth';
 import LoginPage from '~/ui/auth/LoginPage';
-import { registerHandler } from '~/utils/mocks/auth';
+import { loginHandler } from '~/utils/mocks/auth';
 import { render } from '~/utils/test';
 
-const server = setupServer(registerHandler);
+const server = setupServer(loginHandler);
 
 describe('<LoginPage />', () => {
   beforeAll(() => {
@@ -53,5 +53,25 @@ describe('<LoginPage />', () => {
     });
 
     expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+  });
+
+  it('should show the errors of a failed login', async () => {
+    const data: Login = {
+      email: 'admin@example.com',
+      password: faker.internet.password(),
+    };
+
+    render(<LoginPage />);
+
+    user.type(screen.getByRole('textbox', { name: /Email/iu }), data.email);
+    user.type(screen.getByPlaceholderText(/Password/iu), data.password);
+    user.click(screen.getByRole('button', { name: /Sign in/iu }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('button')).not.toBeDisabled();
+    });
+
+    expect(screen.getByRole('list')).toBeVisible();
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
   });
 });

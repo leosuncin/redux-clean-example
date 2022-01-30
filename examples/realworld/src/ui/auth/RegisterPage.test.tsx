@@ -59,4 +59,29 @@ describe('<RegisterPage />', () => {
 
     expect(screen.queryAllByRole('listitem')).toHaveLength(0);
   });
+
+  it('should show the errors of a failed register', async () => {
+    const data: Register = {
+      username: 'admin',
+      email: 'admin@example.com',
+      password: faker.internet.password(),
+    };
+
+    render(<RegisterPage />);
+
+    user.type(
+      screen.getByRole('textbox', { name: /username/iu }),
+      data.username
+    );
+    user.type(screen.getByRole('textbox', { name: /email/iu }), data.email);
+    user.type(screen.getByPlaceholderText(/password/iu), data.password);
+    user.click(screen.getByRole('button', { name: /sign up/iu }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('button')).not.toBeDisabled();
+    });
+
+    expect(screen.getByRole('list')).toBeVisible();
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+  });
 });

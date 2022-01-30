@@ -13,6 +13,7 @@ import type {
   User,
 } from '~/app/ports/auth';
 import type { AppState, AsyncThunkConfig } from '~/app/store';
+import { serializeError } from '~/utils/serializeError';
 
 export type AuthSliceState = {
   status: 'pending' | 'fulfilled' | 'rejected' | 'idle';
@@ -64,6 +65,7 @@ export const { actions, name, reducer } = createSlice({
         (action): action is RejectedAction => rejectedRegex.test(action.type),
         (state, action) => {
           state.status = action.meta.requestStatus;
+          state.errors = action.error.errors;
         }
       );
   },
@@ -79,11 +81,13 @@ export const selectors = {
 export const thunks = {
   register: createAsyncThunk<AuthReturned, Register, AsyncThunkConfig>(
     `${name}/register`,
-    async (payload, { extra }) => extra.auth.register(payload)
+    async (payload, { extra }) => extra.auth.register(payload),
+    { serializeError }
   ),
   login: createAsyncThunk<AuthReturned, Login, AsyncThunkConfig>(
     `${name}/login`,
-    async (payload, { extra }) => extra.auth.login(payload)
+    async (payload, { extra }) => extra.auth.login(payload),
+    { serializeError }
   ),
   getUser: createAsyncThunk<AuthReturned, never, AsyncThunkConfig>(
     `${name}/getUser`,
@@ -91,6 +95,7 @@ export const thunks = {
   ),
   updateUser: createAsyncThunk<AuthReturned, UpdateUser, AsyncThunkConfig>(
     `${name}/updateUser`,
-    async (payload, { extra }) => extra.auth.updateUser(payload)
+    async (payload, { extra }) => extra.auth.updateUser(payload),
+    { serializeError }
   ),
 };
