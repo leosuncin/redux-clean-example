@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import type { Login } from '~/app/ports/auth';
 import ListErrors from '~/ui/common/ListErrors';
 import { useAppThunks, selectors, useAppSelector } from '~/ui/hooks';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const {
     authThunks: { login },
   } = useAppThunks();
@@ -17,6 +18,7 @@ function LoginPage() {
     const payload = Object.fromEntries(formData.entries()) as Login;
 
     await login(payload);
+    navigate('/');
   }
 
   return (
