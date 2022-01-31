@@ -18,7 +18,7 @@ function LoginPage() {
     const payload = Object.fromEntries(formData.entries()) as Login;
 
     await login(payload);
-    navigate('/');
+    navigate('/', { replace: true });
   }
 
   return (

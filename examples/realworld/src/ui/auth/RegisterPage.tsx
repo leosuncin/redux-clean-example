@@ -18,7 +18,7 @@ function RegisterPage() {
     const payload = Object.fromEntries(formData.entries()) as Register;
 
     await register(payload);
-    navigate('/');
+    navigate('/', { replace: true });
   }
 
   return (
