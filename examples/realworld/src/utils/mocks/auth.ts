@@ -1,11 +1,15 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { rest } from 'msw';
 
-import type { Login, Register } from '~/app/ports/auth';
+import type { Login, Register, UpdateUser } from '~/app/ports/auth';
 import { db } from '~/utils/mocks/db';
 
 function generateToken(username: string): string {
   return btoa(JSON.stringify({ sub: username }));
+}
+
+function parseToken(token: string): { sub: string } {
+  return JSON.parse(atob(token));
 }
 
 export const registerHandler = rest.post<{ user: Register }>(
@@ -100,6 +104,78 @@ export const loginHandler = rest.post<{ user: Login }>(
 
     return response(
       context.json({ user: { ...user, token } }),
+      context.delay()
+    );
+  }
+);
+
+export const getUserHandler = rest.get(
+  `${import.meta.env.VITE_BACKEND_URL}/user`,
+  (request, response, context) => {
+    const authorization = request.headers.get('authorization');
+
+    if (!authorization || !/Token .*/u.test(authorization)) {
+      return response(context.status(401), context.delay());
+    }
+
+    const [, token] = authorization.split(' ');
+    const payload = parseToken(token);
+    const user = db.user.findFirst({
+      where: { username: { equals: payload.sub } },
+    });
+
+    if (!user) {
+      return response(context.status(401), context.delay());
+    }
+
+    return response(
+      context.json({ user: { ...user, token: generateToken(user.username) } }),
+      context.delay()
+    );
+  }
+);
+
+export const updateUserHandler = rest.put<{ user: UpdateUser }>(
+  `${import.meta.env.VITE_BACKEND_URL}/user`,
+  (request, response, context) => {
+    const authorization = request.headers.get('authorization');
+
+    if (!authorization || !/Token .*/u.test(authorization)) {
+      return response(context.status(401), context.delay());
+    }
+
+    const [, token] = authorization.split(' ');
+    const payload = parseToken(token);
+
+    const errors: Record<string, string[]> = {};
+
+    if (request.body.user.password && request.body.user.password.length < 8) {
+      errors.password = ['is too short (minimum is 8 characters)'];
+    }
+
+    if (request.body.user.password && request.body.user.password.length > 72) {
+      errors.password = ['is too long (maximum is 72 characters)'];
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return response(
+        context.status(422),
+        context.json({ errors }),
+        context.delay()
+      );
+    }
+
+    const user = db.user.update({
+      where: { username: { equals: payload.sub } },
+      data: request.body.user,
+    });
+
+    if (!user) {
+      return response(context.status(401), context.delay());
+    }
+
+    return response(
+      context.json({ user: { ...user, token: generateToken(user.username) } }),
       context.delay()
     );
   }

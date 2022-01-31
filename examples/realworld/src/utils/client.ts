@@ -1,6 +1,10 @@
 import ky from 'ky';
 
-let token: string;
+let token: string | undefined | null;
+
+export function setToken(t: string | undefined | null) {
+  token = t;
+}
 
 export const client = ky.create({
   prefixUrl: import.meta.env.VITE_BACKEND_URL,
@@ -16,7 +20,7 @@ export const client = ky.create({
       async (_request, _options, response) => {
         if (/\/user(?:s\/)?/iu.test(response.url) && response.ok) {
           const json = await response.json();
-          token = json.user.token;
+          setToken(json.user.token);
         }
       },
     ],

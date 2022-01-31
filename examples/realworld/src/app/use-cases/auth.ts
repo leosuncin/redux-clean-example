@@ -1,6 +1,5 @@
 import {
   type AsyncThunk,
-  type PayloadAction,
   createAsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';
@@ -12,7 +11,7 @@ import type {
   UpdateUser,
   User,
 } from '~/app/ports/auth';
-import type { AppState, AsyncThunkConfig } from '~/app/store';
+import type { AppState, AppThunk, AsyncThunkConfig } from '~/app/store';
 import { serializeError } from '~/utils/serializeError';
 
 export type AuthSliceState = {
@@ -35,9 +34,6 @@ export const { actions, name, reducer } = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setToken(state, action: PayloadAction<string>) {
-      state.token = action.payload;
-    },
     logout: () => initialState,
   },
   extraReducers(builder) {
@@ -98,4 +94,7 @@ export const thunks = {
     async (payload, { extra }) => extra.auth.updateUser(payload),
     { serializeError }
   ),
+  logout(): AppThunk<ReturnType<typeof actions['logout']>> {
+    return (dispatch) => dispatch(actions.logout());
+  },
 };

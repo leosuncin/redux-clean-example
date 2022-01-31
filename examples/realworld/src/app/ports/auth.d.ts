@@ -1,8 +1,8 @@
 export type User = {
   email: string;
   username: string;
-  bio: string;
-  image: string;
+  bio?: string;
+  image?: string;
 };
 export type AuthResponse = {
   user: User & {

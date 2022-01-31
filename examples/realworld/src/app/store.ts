@@ -1,5 +1,6 @@
 import {
   type Action,
+  type PreloadedState,
   type ThunkAction,
   configureStore,
 } from '@reduxjs/toolkit';
@@ -25,9 +26,10 @@ export type ThunksExtraArgument = {
 
 export type CreateStoreParams = {
   client: KyInstance;
+  preloadedState?: PreloadedState<AppState>;
 };
 
-export function createStore({ client }: CreateStoreParams) {
+export function createStore({ client, preloadedState }: CreateStoreParams) {
   const authApi = createAuthApi({ client });
 
   const extraArgument: ThunksExtraArgument = {
@@ -42,6 +44,7 @@ export function createStore({ client }: CreateStoreParams) {
           extraArgument,
         },
       }),
+    preloadedState,
   });
 }
 
@@ -53,7 +56,9 @@ export type AppStore = ReturnType<typeof createStore>;
 
 export type AppDispatch = AppStore['dispatch'];
 
-export type AppState = ReturnType<AppStore['getState']>;
+export type AppState = {
+  [authUseCase.name]: authUseCase.AuthSliceState;
+};
 
 export type AppThunk<RtnType = void | Promise<void>> = ThunkAction<
   RtnType,

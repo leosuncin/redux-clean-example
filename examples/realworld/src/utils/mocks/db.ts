@@ -26,3 +26,9 @@ db.user.create({
   bio: 'The secret life of a Dev',
   image: 'https://thispersondoesnotexist.com/image',
 });
+db.user.create({
+  email: 'username@example.com',
+  username: 'username',
+  bio: 'I am nobody',
+  image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
+});
