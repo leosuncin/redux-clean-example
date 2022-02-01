@@ -14,7 +14,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "redux-clean-architecture": "^1.0.3",
+    "redux-clean-architecture": "^1.2.2",
     "todomvc-app-css": "^2.4.1",
     "todomvc-common": "^1.0.5"
   },

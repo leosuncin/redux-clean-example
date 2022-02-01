@@ -44,7 +44,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       react-redux: ^7.2.6
-      redux-clean-architecture: ^1.0.3
+      redux-clean-architecture: ^1.2.2
       todomvc-app-css: ^2.4.1
       todomvc-common: ^1.0.5
       typescript: ^4.5.5
@@ -56,7 +56,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
-      redux-clean-architecture: 1.0.3_@reduxjs+toolkit@1.7.1
+      redux-clean-architecture: 1.2.2_@reduxjs+toolkit@1.7.1
       todomvc-app-css: 2.4.1
       todomvc-common: 1.0.5
     devDependencies:
@@ -1690,6 +1690,17 @@ packages:
 
   /redux-clean-architecture/1.0.3_@reduxjs+toolkit@1.7.1:
     resolution: {integrity: sha512-ZNMvT827gSfxaG/vDMWBM8P3juQfeqfaLekTfgIhyXIS4zFrXZ9U/BPqNjtUUufHC0mw56cZNXJ2pQbAT/vh6w==}
+    peerDependencies:
+      '@reduxjs/toolkit': ^1.7.1
+    dependencies:
+      '@reduxjs/toolkit': 1.7.1_react-redux@7.2.6+react@17.0.2
+      evt: 1.10.2
+      minimal-polyfills: 2.2.1
+      tsafe: 0.9.0
+    dev: false
+
+  /redux-clean-architecture/1.2.2_@reduxjs+toolkit@1.7.1:
+    resolution: {integrity: sha512-0kez7X9ZpMQQ29ESScvpffdu/nqJaIXPD2lgQA99YcZcxwlIWfh3fAyfdDDakF/GSDV1u/VyVz0LIhtJoIg12w==}
     peerDependencies:
       '@reduxjs/toolkit': ^1.7.1
     dependencies:

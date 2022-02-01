@@ -1,11 +1,11 @@
 import {
-  createAsyncThunk,
   createEntityAdapter,
   createSelector,
   createSlice,
   EntityState,
   PayloadAction,
 } from '@reduxjs/toolkit';
+import { createAsyncThunk } from "../createAsyncThunk";
 
 import { AppState, AppThunk, AsyncThunkConfig } from '../store';
 import type { CreateTodo, Todo, TodoId, UpdateTodo } from '../ports/todomvc';
@@ -121,13 +121,13 @@ export const selectors = {
 };
 
 export const thunks = {
-  fetchTodoList: createAsyncThunk<Todo[], void, AsyncThunkConfig>(
+  ...createAsyncThunk()(
     `${name}/fetchTodoList`,
     async (_, { extra, signal }) => extra.todoApi.listTodo(signal)
   ),
-  addTodo: createAsyncThunk<Todo, CreateTodo, AsyncThunkConfig>(
+  ...createAsyncThunk()(
     `${name}/addTodo`,
-    async (newTodo, { extra }) => extra.todoApi.createTodo(newTodo)
+    async (newTodo: CreateTodo, { extra }) => extra.todoApi.createTodo(newTodo)
   ),
   toggleAll(completed: boolean): AppThunk<Promise<unknown[]>> {
     return (dispatch, getState) => {
@@ -138,9 +138,9 @@ export const thunks = {
       );
     };
   },
-  toggle: createAsyncThunk<Todo, Todo['id'], AsyncThunkConfig>(
+  ...createAsyncThunk()(
     `${name}/toggle`,
-    async (todoId, { extra, getState }) => {
+    async (todoId: Todo["id"], { extra, getState }) => {
       const todo = todoSelectors.selectById(getState(), todoId)!;
 
       return extra.todoApi.updateTodo(todoId, {
@@ -149,15 +149,11 @@ export const thunks = {
       });
     }
   ),
-  destroy: createAsyncThunk<void, Todo['id'], AsyncThunkConfig>(
+  ...createAsyncThunk()(
     `${name}/destroy`,
-    async (todoId, { extra }) => extra.todoApi.deleteTodo(todoId)
+    async (todoId: Todo['id'], { extra }) => extra.todoApi.deleteTodo(todoId)
   ),
-  update: createAsyncThunk<
-    Todo,
-    Pick<Todo, 'id'> & Partial<UpdateTodo>,
-    AsyncThunkConfig
-  >(`${name}/update`, async (payload, { extra, getState }) => {
+  ...createAsyncThunk()(`${name}/update`, async (payload: Pick<Todo, 'id'> & Partial<UpdateTodo>, { extra, getState }) => {
     const todo = todoSelectors.selectById(getState(), payload.id)!;
 
     return extra.todoApi.updateTodo(payload.id, { ...todo, ...payload });
