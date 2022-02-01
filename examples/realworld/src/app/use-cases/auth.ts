@@ -68,8 +68,15 @@ export const { actions, name, reducer } = createSlice({
 });
 
 export const selectors = {
-  isAuthenticated: (state: AppState): boolean => Boolean(state.auth.token),
-  user: (state: AppState): AuthSliceState['user'] => state.auth.user,
+  isAuthenticated: (state: AppState): boolean =>
+    typeof state.auth.token === 'string',
+  user: (state: AppState): User => {
+    if (!state.auth.user) {
+      throw new Error('Is not authenticated');
+    }
+
+    return state.auth.user;
+  },
   errors: (state: AppState): AuthSliceState['errors'] => state.auth.errors,
   isLoading: (state: AppState): boolean => state.auth.status === 'pending',
 };

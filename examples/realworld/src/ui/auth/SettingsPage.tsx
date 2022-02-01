@@ -40,7 +40,7 @@ function SettingsPage() {
                     placeholder="URL of profile picture"
                     aria-label="URL of profile picture"
                     name="image"
-                    defaultValue={user?.image ?? ''}
+                    defaultValue={user.image ?? ''}
                   />
                 </fieldset>
 
@@ -51,7 +51,7 @@ function SettingsPage() {
                     placeholder="Username"
                     aria-label="Username"
                     name="username"
-                    defaultValue={user?.username}
+                    defaultValue={user.username}
                     max={30}
                   />
                 </fieldset>
@@ -63,7 +63,7 @@ function SettingsPage() {
                     placeholder="Short bio about you"
                     aria-label="Short bio about you"
                     name="bio"
-                    defaultValue={user?.bio ?? ''}
+                    defaultValue={user.bio ?? ''}
                   />
                 </fieldset>
 
@@ -75,7 +75,7 @@ function SettingsPage() {
                     placeholder="Email"
                     aria-label="Email"
                     name="email"
-                    defaultValue={user?.email}
+                    defaultValue={user.email}
                   />
                 </fieldset>
 

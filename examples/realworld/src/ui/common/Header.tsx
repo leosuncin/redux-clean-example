@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import type { User } from '~/app/ports/auth';
 import { selectors, useAppSelector } from '~/ui/hooks';
 
 function LoggedOutNavbar() {
@@ -27,11 +26,8 @@ function LoggedOutNavbar() {
   );
 }
 
-export type Props = {
-  currentUser: User;
-};
-
-function LoggedInNavbar({ currentUser }: Props) {
+function LoggedInNavbar() {
+  const { user } = useAppSelector(selectors.auth.user);
   return (
     <ul className="nav navbar-nav pull-xs-right">
       <li className="nav-item">
@@ -55,16 +51,16 @@ function LoggedInNavbar({ currentUser }: Props) {
       </li>
 
       <li className="nav-item">
-        <Link to={`/@${currentUser.username}`} className="nav-link">
+        <Link to={`/@${user.username}`} className="nav-link">
           <img
             src={
-              currentUser.image ??
+              user.image ??
               'https://static.productionready.io/images/smiley-cyrus.jpg'
             }
             className="user-pic"
-            alt={currentUser.username}
+            alt={user.username}
           />
-          {currentUser.username}
+          {user.username}
         </Link>
       </li>
     </ul>
@@ -72,7 +68,7 @@ function LoggedInNavbar({ currentUser }: Props) {
 }
 
 function Header() {
-  const { user: currentUser } = useAppSelector(selectors.auth.user);
+  const { isAuthenticated } = useAppSelector(selectors.auth.isAuthenticated);
 
   return (
     <nav className="navbar navbar-light">
@@ -81,11 +77,7 @@ function Header() {
           conduit
         </Link>
 
-        {currentUser ? (
-          <LoggedInNavbar currentUser={currentUser} />
-        ) : (
-          <LoggedOutNavbar />
-        )}
+        {isAuthenticated ? <LoggedInNavbar /> : <LoggedOutNavbar />}
       </div>
     </nav>
   );
