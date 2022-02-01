@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import type { Todo, TodoApi } from '../ports/todomvc';
 
 async function post<T>(
@@ -16,15 +17,13 @@ async function post<T>(
   return response.json();
 }
 
-async function del<T>(request: RequestInfo): Promise<T> {
-  const response = await fetch(request, {
+async function del(request: RequestInfo) {
+  await fetch(request, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json',
     },
   });
-
-  return response.json();
 }
 
 async function put<T>(

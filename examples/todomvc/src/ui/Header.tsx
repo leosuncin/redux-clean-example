@@ -18,7 +18,7 @@ function Header() {
     const title = newTodo.trim();
 
     if (title) {
-      todomvcThunks.addTodo({ title });
+      void todomvcThunks.addTodo({ title });
       setNewTodo('');
     }
 
@@ -35,7 +35,6 @@ function Header() {
         value={newTodo}
         onKeyDown={handleNewTodoKeyDown}
         onChange={handleChange}
-        autoFocus={true}
       />
     </header>
   );

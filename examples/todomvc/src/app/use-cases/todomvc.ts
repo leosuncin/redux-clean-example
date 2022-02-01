@@ -1,14 +1,13 @@
+import type { EntityState, PayloadAction } from '@reduxjs/toolkit';
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSelector,
   createSlice,
-  EntityState,
-  PayloadAction,
 } from '@reduxjs/toolkit';
 
-import { AppState, AppThunk, AsyncThunkConfig } from '../store';
-import type { CreateTodo, Todo, TodoId, UpdateTodo } from '../ports/todomvc';
+import type { CreateTodo, Todo, UpdateTodo } from '../ports/todomvc';
+import type { AppState, AppThunk, AsyncThunkConfig } from '../store';
 
 export enum Filter {
   ALL_TODOS = 'all',
@@ -16,10 +15,10 @@ export enum Filter {
   COMPLETED_TODOS = 'completed',
 }
 
-export interface TodoMvcState extends EntityState<Todo> {
+export type TodoMvcState = {
   filter: Filter;
   status: 'idle' | 'loading' | 'failed';
-}
+} & EntityState<Todo>;
 
 const adapter = createEntityAdapter<Todo>({
   selectId: (todo) => todo.id,
@@ -73,13 +72,13 @@ export const { actions, name, reducer } = createSlice({
 
     builder
       .addMatcher(
-        (action) => /pending$/.test(action.type),
+        (action) => action.type.endsWith('pending'),
         (state) => {
           state.status = 'loading';
         }
       )
       .addMatcher(
-        (action) => /rejected$/.test(action.type),
+        (action) => action.type.endsWith('rejected'),
         (state) => {
           state.status = 'failed';
         }
@@ -121,7 +120,7 @@ export const selectors = {
 };
 
 export const thunks = {
-  fetchTodoList: createAsyncThunk<Todo[], void, AsyncThunkConfig>(
+  fetchTodoList: createAsyncThunk<Todo[], undefined, AsyncThunkConfig>(
     ``,
     async (_, { extra, signal }) => extra.todoApi.listTodo(signal)
   ),
@@ -141,6 +140,7 @@ export const thunks = {
   toggle: createAsyncThunk<Todo, Todo['id'], AsyncThunkConfig>(
     `${name}/toggle`,
     async (todoId, { extra, getState }) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const todo = todoSelectors.selectById(getState(), todoId)!;
 
       return extra.todoApi.updateTodo(todoId, {
@@ -149,7 +149,7 @@ export const thunks = {
       });
     }
   ),
-  destroy: createAsyncThunk<void, Todo['id'], AsyncThunkConfig>(
+  destroy: createAsyncThunk<unknown, Todo['id'], AsyncThunkConfig>(
     `${name}/destroy`,
     async (todoId, { extra }) => extra.todoApi.deleteTodo(todoId)
   ),
@@ -158,6 +158,7 @@ export const thunks = {
     Pick<Todo, 'id'> & Partial<UpdateTodo>,
     AsyncThunkConfig
   >(`${name}/update`, async (payload, { extra, getState }) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const todo = todoSelectors.selectById(getState(), payload.id)!;
 
     return extra.todoApi.updateTodo(payload.id, { ...todo, ...payload });

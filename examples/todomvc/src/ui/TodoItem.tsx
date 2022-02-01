@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useRef, useState } from 'react';
 
-import { Todo, TodoId } from '../app/ports/todomvc';
+import type { Todo, TodoId } from '../app/ports/todomvc';
 
-export interface TodoItemProps {
+export type TodoItemProps = {
   editing?: boolean;
   todo: Todo;
   onCancel(): void;
@@ -11,9 +11,9 @@ export interface TodoItemProps {
   onEdit(): void;
   onSave(text: string): void;
   onToggle(todoId: TodoId): void;
-}
+};
 
-const TodoItem = ({
+function TodoItem({
   editing,
   todo,
   onCancel,
@@ -21,7 +21,7 @@ const TodoItem = ({
   onEdit,
   onSave,
   onToggle,
-}: TodoItemProps) => {
+}: TodoItemProps) {
   const [editText, setEditText] = useState<string>(todo.title);
   const editField = useRef<HTMLInputElement>(null);
 
@@ -45,7 +45,9 @@ const TodoItem = ({
     if (event.key === 'Escape') {
       setEditText(todo.title);
       onCancel();
-    } else if (event.key === 'Enter') {
+      return;
+    }
+    if (event.key === 'Enter') {
       handleSubmit();
     }
   }
@@ -58,7 +60,7 @@ const TodoItem = ({
     <li
       className={classNames({
         completed: todo.completed,
-        editing: editing,
+        editing,
       })}
     >
       <div className="view">
@@ -67,12 +69,18 @@ const TodoItem = ({
           type="checkbox"
           aria-label={`Toggle ${todo.title}`}
           checked={todo.completed}
-          onChange={() => onToggle(todo.id)}
+          onChange={() => {
+            onToggle(todo.id);
+          }}
         />
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <label onDoubleClick={handleEdit}>{todo.title}</label>
         <button
+          type="button"
           className="destroy"
-          onClick={() => onDestroy(todo.id)}
+          onClick={() => {
+            onDestroy(todo.id);
+          }}
           aria-label={`Remove ${todo.title}`}
         />
       </div>
@@ -89,6 +97,6 @@ const TodoItem = ({
       )}
     </li>
   );
-};
+}
 
 export default TodoItem;

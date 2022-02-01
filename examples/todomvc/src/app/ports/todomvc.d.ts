@@ -6,19 +6,19 @@ export type Opaque<IdType, EntityName> = IdType & {
 
 export type TodoId = Opaque<number, 'Todo'>;
 
-export interface Todo {
+export type Todo = {
   id: TodoId;
   title: string;
   completed: boolean;
-}
+};
 
 export type CreateTodo = Pick<Todo, 'title'>;
 
 export type UpdateTodo = Pick<Todo, 'title' | 'completed'>;
 
-export interface TodoApi {
+export type TodoApi = {
   createTodo(newTodo: CreateTodo): Promise<Todo>;
   listTodo(signal?: AbortSignal): Promise<Todo[]>;
   updateTodo(todoId: TodoId, updates: UpdateTodo): Promise<Todo>;
   deleteTodo(todoId: TodoId): Promise<void>;
-}
+};

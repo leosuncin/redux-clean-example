@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { Todo, TodoId } from '../app/ports/todomvc';
-import { selectors, useAppSelector, useAppThunks } from './hooks';
+import type { Todo, TodoId } from '../app/ports/todomvc';
 import TodoItem from './TodoItem';
+import { selectors, useAppSelector, useAppThunks } from './hooks';
 
-const TodoList = () => {
+function TodoList() {
   const [editing, setEditing] = useState<TodoId | null>(null);
   const { todos } = useAppSelector(selectors.todomvc.todos);
   const { counter } = useAppSelector(selectors.todomvc.counter);
@@ -22,14 +22,14 @@ const TodoList = () => {
 
   function handleSave(todo: Todo) {
     return (text: string) => {
-      todomvcThunks.update({ id: todo.id, title: text });
+      void todomvcThunks.update({ id: todo.id, title: text });
       setEditing(null);
     };
   }
 
   function handleToggleAll(event: React.ChangeEvent<HTMLInputElement>) {
     const completed = event.target.checked;
-    todomvcThunks.toggleAll(completed);
+    void todomvcThunks.toggleAll(completed);
   }
 
   return (
@@ -42,7 +42,7 @@ const TodoList = () => {
         checked={counter.activeTodoCount === 0}
         onChange={handleToggleAll}
       />
-      <label htmlFor="toggle-all" />
+      <label htmlFor="toggle-all" aria-label="Toggle all" />
       <ul className="todo-list">
         {todos.map((todo) => (
           <TodoItem
@@ -59,6 +59,6 @@ const TodoList = () => {
       </ul>
     </section>
   );
-};
+}
 
 export default TodoList;

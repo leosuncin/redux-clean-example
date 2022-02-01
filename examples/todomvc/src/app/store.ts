@@ -1,20 +1,20 @@
-import {
+import type {
   Action,
-  configureStore,
   ThunkAction as GenericThunkAction,
 } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   usecasesToAutoDispatchThunks,
   usecasesToReducer,
   usecasesToSelectors,
 } from 'redux-clean-architecture';
 
+/* eslint-disable import/no-namespace */
 import type { TodoApi } from './ports/todomvc';
-import {
-  createTodoApi,
-  CreateTodoApiParams,
-} from './secondary-adapters/createTodoApi';
+import type { CreateTodoApiParams } from './secondary-adapters/createTodoApi';
+import { createTodoApi } from './secondary-adapters/createTodoApi';
 import * as todomvcUseCase from './use-cases/todomvc';
+/* eslint-enable import/no-namespace */
 
 export const useCases = [todomvcUseCase];
 
@@ -33,7 +33,7 @@ export function createStore(config: CreateStoreParams) {
     todoApi,
   };
 
-  const store = configureStore({
+  return configureStore({
     reducer: usecasesToReducer(useCases),
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -42,8 +42,6 @@ export function createStore(config: CreateStoreParams) {
         },
       }),
   });
-
-  return store;
 }
 
 export const selectors = usecasesToSelectors(useCases);

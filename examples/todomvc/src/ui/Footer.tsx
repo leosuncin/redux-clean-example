@@ -4,7 +4,7 @@ import { Filter } from '../app/use-cases/todomvc';
 import { selectors, useAppSelector, useAppThunks } from './hooks';
 
 export function pluralize(count: number, word: string): string {
-  return count === 1 ? word : word + 's';
+  return count === 1 ? word : `${word}s`;
 }
 
 function Footer() {
@@ -73,6 +73,7 @@ function Footer() {
       </ul>
       {counter.completedCount > 0 ? (
         <button
+          type="button"
           className="clear-completed"
           onClick={() => todomvcThunks.clearCompleted()}
         >
