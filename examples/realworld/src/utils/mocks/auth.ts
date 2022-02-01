@@ -84,13 +84,35 @@ export const registerHandler = rest.post<{ user: Register }>(
 export const loginHandler = rest.post<{ user: Login }>(
   `${import.meta.env.VITE_BACKEND_URL}/users/login`,
   (request, response, context) => {
+    const errors: Partial<Record<keyof Register, string[]>> = {};
+
+    if (!request.body.user.password) {
+      errors.password = ["can't be blank"];
+    }
+
+    if (request.body.user.password.length < 8) {
+      errors.password = ['is too short (minimum is 8 characters)'];
+    }
+
+    if (request.body.user.password.length > 72) {
+      errors.password = ['is too long (maximum is 72 characters)'];
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return response(
+        context.status(422),
+        context.json({ errors }),
+        context.delay()
+      );
+    }
+
     const user = db.user.findFirst({
       where: { email: { equals: request.body.user.email } },
     });
 
     if (!user || request.body.user.password !== 'Pa$$w0rd!') {
       return response(
-        context.status(422),
+        context.status(403),
         context.json({
           errors: {
             'email or password': ['is invalid'],

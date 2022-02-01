@@ -41,7 +41,10 @@ export const createAuthApi = ({ client }: CreateAuthApiParams): AuthApi => {
 
         return { token, user };
       } catch (error) {
-        if (error instanceof HTTPError && error.response.status === 422) {
+        if (
+          error instanceof HTTPError &&
+          [403, 422].includes(error.response.status)
+        ) {
           const { errors } = await error.response.json();
 
           throw new ValidationError(error.message, errors);

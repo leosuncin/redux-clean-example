@@ -162,7 +162,7 @@ describe('Auth reducer', () => {
     const dispatch = vi.fn();
     const thunk = thunks.login({
       email: faker.internet.exampleEmail(),
-      password: faker.internet.password(),
+      password: faker.internet.password(4),
     });
 
     await thunk(dispatch, () => ({ auth: initialState }), { auth: authApi });
