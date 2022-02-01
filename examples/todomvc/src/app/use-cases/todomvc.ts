@@ -122,7 +122,7 @@ export const selectors = {
 
 export const thunks = {
   fetchTodoList: createAsyncThunk<Todo[], void, AsyncThunkConfig>(
-    ``,
+    `${name}/fetchTodoList`,
     async (_, { extra, signal }) => extra.todoApi.listTodo(signal)
   ),
   addTodo: createAsyncThunk<Todo, CreateTodo, AsyncThunkConfig>(
