@@ -6,7 +6,7 @@ import { ValidationError } from '~/utils/serializeError';
 
 export type CreateAuthApiParams = { client: KyInstance };
 
-export const createAuthApi = ({ client }: CreateAuthApiParams): AuthApi => {
+export function createAuthApi({ client }: CreateAuthApiParams): AuthApi {
   return {
     async register(payload) {
       try {
@@ -82,4 +82,4 @@ export const createAuthApi = ({ client }: CreateAuthApiParams): AuthApi => {
       }
     },
   };
-};
+}

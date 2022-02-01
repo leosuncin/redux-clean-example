@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { setupServer } from 'msw/node';
 
 import type { AuthReturned } from '~/app/ports/auth';
-import { createAuthApi } from '~/app/secondary-adapters/createAuth';
+import { createAuthApi } from '~/app/secondary-adapters/createAuthApi';
 import {
   type AuthSliceState,
   initialState,

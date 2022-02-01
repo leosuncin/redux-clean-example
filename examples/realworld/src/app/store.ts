@@ -13,7 +13,7 @@ import {
 
 /* eslint-disable import/no-namespace */
 import type { AuthApi } from '~/app/ports/auth';
-import { createAuthApi } from '~/app/secondary-adapters/createAuth';
+import { createAuthApi } from '~/app/secondary-adapters/createAuthApi';
 import * as authUseCase from '~/app/use-cases/auth';
 /* eslint-enable import/no-namespace */
 import type { SerializedValidationError } from '~/utils/serializeError';
