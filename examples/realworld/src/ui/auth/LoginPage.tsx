@@ -1,10 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import type { Login } from '~/app/ports/auth';
+import { getRedirectToFromState } from '~/ui/auth/ProtectedRoute';
 import ListErrors from '~/ui/common/ListErrors';
 import { useAppThunks, selectors, useAppSelector } from '~/ui/hooks';
 
 function LoginPage() {
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     authThunks: { login },
@@ -16,9 +18,13 @@ function LoginPage() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const payload = Object.fromEntries(formData.entries()) as Login;
+    const resultAction = await login(payload);
 
-    await login(payload);
-    navigate('/', { replace: true });
+    if (resultAction.meta.requestStatus === 'fulfilled') {
+      const redirectTo = getRedirectToFromState(location);
+
+      navigate(redirectTo, { replace: true });
+    }
   }
 
   return (

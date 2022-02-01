@@ -2,8 +2,10 @@ import { faker } from '@faker-js/faker';
 import { screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
+import { Route, Routes } from 'react-router-dom';
 
 import { createStore } from '~/app/store';
+import ProtectedRoute from '~/ui/auth/ProtectedRoute';
 import SettingsPage from '~/ui/auth/SettingsPage';
 import { client } from '~/utils/client';
 import { getUserHandler, updateUserHandler } from '~/utils/mocks/auth';
@@ -112,7 +114,16 @@ describe('<SettingsPage />', () => {
       },
     });
 
-    render(<SettingsPage />, { store });
+    render(
+      <Routes>
+        <Route path="/login" element={<h1>Sign In</h1>} />
+        <Route
+          path="/settings"
+          element={<ProtectedRoute element={<SettingsPage />} />}
+        />
+      </Routes>,
+      { store, initialEntries: ['/settings'] }
+    );
 
     user.click(
       screen.getByRole('button', { name: /or click here to logout/iu })

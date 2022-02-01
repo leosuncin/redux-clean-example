@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import type { UpdateUser } from '~/app/ports/auth';
 import ListErrors from '~/ui/common/ListErrors';
 import { useAppThunks, selectors, useAppSelector } from '~/ui/hooks';
 
 function SettingsPage() {
-  const navigate = useNavigate();
   const { authThunks } = useAppThunks();
   const { isLoading } = useAppSelector(selectors.auth.isLoading);
   const { errors } = useAppSelector(selectors.auth.errors);
-  const { isAuthenticated } = useAppSelector(selectors.auth.isAuthenticated);
   const { user } = useAppSelector(selectors.auth.user);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -24,12 +21,6 @@ function SettingsPage() {
   useEffect(() => {
     void authThunks.getUser();
   }, [authThunks]);
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/', { state: { redirectTo: '/settings' } });
-    }
-  }, [isAuthenticated, navigate]);
 
   return (
     <div className="settings-page">
