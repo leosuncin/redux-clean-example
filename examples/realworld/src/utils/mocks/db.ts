@@ -18,6 +18,9 @@ export const db = factory({
     bio: String,
     image: String,
   },
+  tag: {
+    name: primaryKey(String),
+  },
 });
 
 db.user.create({
@@ -32,3 +35,10 @@ db.user.create({
   bio: 'I am nobody',
   image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
 });
+
+db.tag.create({ name: 'react' });
+db.tag.create({ name: 'redux' });
+db.tag.create({ name: 'markdown' });
+db.tag.create({ name: 'lorem ipsum' });
+db.tag.create({ name: 'dragons' });
+db.tag.create({ name: 'training' });

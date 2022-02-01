@@ -13,15 +13,19 @@ import {
 
 /* eslint-disable import/no-namespace */
 import type { AuthApi } from '~/app/ports/auth';
+import type { TagsApi } from '~/app/ports/tags';
 import { createAuthApi } from '~/app/secondary-adapters/createAuthApi';
+import { createTagsApi } from '~/app/secondary-adapters/createTagsApi';
 import * as authUseCase from '~/app/use-cases/auth';
+import * as tagsUseCase from '~/app/use-cases/tags';
 /* eslint-enable import/no-namespace */
 import type { SerializedValidationError } from '~/utils/serializeError';
 
-export const useCases = [authUseCase];
+export const useCases = [authUseCase, tagsUseCase];
 
 export type ThunksExtraArgument = {
   [authUseCase.name]: AuthApi;
+  [tagsUseCase.name]: TagsApi;
 };
 
 export type CreateStoreParams = {
@@ -31,9 +35,11 @@ export type CreateStoreParams = {
 
 export function createStore({ client, preloadedState }: CreateStoreParams) {
   const authApi = createAuthApi({ client });
+  const tagsApi = createTagsApi({ client });
 
   const extraArgument: ThunksExtraArgument = {
     [authUseCase.name]: authApi,
+    [tagsUseCase.name]: tagsApi,
   };
 
   return configureStore({
@@ -58,6 +64,7 @@ export type AppDispatch = AppStore['dispatch'];
 
 export type AppState = {
   [authUseCase.name]: authUseCase.AuthSliceState;
+  [tagsUseCase.name]: tagsUseCase.TagsSliceState;
 };
 
 export type AppThunk<RtnType = void | Promise<void>> = ThunkAction<
