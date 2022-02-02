@@ -20,12 +20,11 @@ export type TodoMvcState = {
   status: 'idle' | 'loading' | 'failed';
 } & EntityState<Todo>;
 
-const adapter = createEntityAdapter<Todo>({
+export const adapter = createEntityAdapter<Todo>({
   selectId: (todo) => todo.id,
 });
 
 export const initialState: TodoMvcState = adapter.getInitialState({
-  items: [],
   filter: Filter.ALL_TODOS,
   status: 'idle',
 });
