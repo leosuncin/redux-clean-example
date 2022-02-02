@@ -1,7 +1,7 @@
 import {
-  Action,
+  type Action,
+  type ThunkAction as GenericThunkAction,
   configureStore,
-  ThunkAction as GenericThunkAction,
 } from '@reduxjs/toolkit';
 import {
   usecasesToAutoDispatchThunks,
@@ -9,9 +9,11 @@ import {
   usecasesToSelectors,
 } from 'redux-clean-architecture';
 
+/* eslint-disable import/no-namespace */
 import type { CounterApi } from './ports/counter';
 import { createCounter } from './secondary-adapters/createCounter';
 import * as counterUseCase from './use-cases/counter';
+/* eslint-enable import/no-namespace */
 
 export const useCases = [counterUseCase];
 
@@ -26,7 +28,7 @@ export function createStore() {
     counterApi,
   };
 
-  const store = configureStore({
+  return configureStore({
     reducer: usecasesToReducer(useCases),
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -35,8 +37,6 @@ export function createStore() {
         },
       }),
   });
-
-  return store;
 }
 
 export const selectors = usecasesToSelectors(useCases);

@@ -1,10 +1,13 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import {
+  type TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import {
-  AppDispatch,
-  AppState,
+  type AppDispatch,
+  type AppState,
   getAutoDispatchThunks,
-  selectors,
 } from '../app/store';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -17,4 +20,4 @@ export function useAppThunks() {
   return getAutoDispatchThunks(dispatch);
 }
 
-export { selectors };
+export { selectors } from '../app/store';

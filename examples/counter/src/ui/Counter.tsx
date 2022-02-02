@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useAppSelector, useAppThunks, selectors } from './hooks';
 import styles from './Counter.module.css';
+import { useAppSelector, useAppThunks, selectors } from './hooks';
 
 function Counter() {
   const { count } = useAppSelector(selectors.counter.count);
@@ -14,6 +14,7 @@ function Counter() {
     <>
       <div className={styles.row}>
         <button
+          type="button"
           className={styles.button}
           aria-label="Decrement value"
           onClick={() => counterThunks.decrement()}
@@ -22,6 +23,7 @@ function Counter() {
         </button>
         <span className={styles.value}>{count}</span>
         <button
+          type="button"
           className={styles.button}
           aria-label="Increment value"
           onClick={() => counterThunks.increment()}
@@ -34,21 +36,26 @@ function Counter() {
           className={styles.textbox}
           aria-label="Set increment amount"
           value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
+          onChange={(e) => {
+            setIncrementAmount(e.target.value);
+          }}
         />
         <button
+          type="button"
           className={styles.button}
           onClick={() => counterThunks.incrementByAmount(incrementValue)}
         >
           Add Amount
         </button>
         <button
+          type="button"
           className={styles.asyncButton}
           onClick={() => counterThunks.incrementAsync(incrementValue)}
         >
           Add Async
         </button>
         <button
+          type="button"
           className={styles.button}
           onClick={() => counterThunks.incrementIfOdd(incrementValue)}
         >

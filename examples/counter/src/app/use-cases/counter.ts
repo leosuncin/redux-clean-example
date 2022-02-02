@@ -1,11 +1,15 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  type PayloadAction,
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
 
-import { AppThunk, AppState, AsyncThunkConfig } from '../store';
+import type { AppThunk, AppState, AsyncThunkConfig } from '../store';
 
-export interface CounterState {
+export type CounterState = {
   value: number;
   status: 'idle' | 'loading' | 'failed';
-}
+};
 
 export const initialState: CounterState = {
   value: 0,
@@ -42,7 +46,7 @@ export const { reducer, actions, name } = createSlice({
 });
 
 export const selectors = {
-  count: (state: AppState) => state.counter.value,
+  count: (state: AppState): number => state.counter.value,
 };
 
 export const thunks = {
