@@ -19,5 +19,5 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

@@ -7,7 +7,7 @@ type CustomRenderOptions = RenderOptions & { store?: AppStore };
 
 function customRender(
   ui: React.ReactElement,
-  { store = createStore(), ...options }: CustomRenderOptions = {}
+  { store = createStore(), ...options }: CustomRenderOptions = {},
 ) {
   return render(<Provider store={store}>{ui}</Provider>, options);
 }

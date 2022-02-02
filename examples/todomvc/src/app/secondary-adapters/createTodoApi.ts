@@ -3,7 +3,7 @@ import type { Todo, TodoApi } from '../ports/todomvc';
 
 async function post<T>(
   request: RequestInfo,
-  body: Record<string, unknown>
+  body: Record<string, unknown>,
 ): Promise<T> {
   const response = await fetch(request, {
     method: 'POST',
@@ -28,7 +28,7 @@ async function del(request: RequestInfo) {
 
 async function put<T>(
   request: RequestInfo,
-  body: Record<string, unknown>
+  body: Record<string, unknown>,
 ): Promise<T> {
   const response = await fetch(request, {
     method: 'PUT',

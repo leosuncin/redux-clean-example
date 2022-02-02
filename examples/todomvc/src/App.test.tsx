@@ -73,7 +73,7 @@ describe('<App />', () => {
 
     user.type(
       screen.getByRole('textbox', { name: 'Add a new todo' }),
-      `${todo.title}{enter}`
+      `${todo.title}{enter}`,
     );
 
     await waitFor(() => {
@@ -99,11 +99,11 @@ describe('<App />', () => {
     expect(
       screen.getByRole<HTMLInputElement>('checkbox', {
         name: `Toggle ${todoList[0].title}`,
-      }).checked
+      }).checked,
     ).toBe(todoList[0].completed);
 
     user.click(
-      screen.getByRole('checkbox', { name: `Toggle ${todoList[0].title}` })
+      screen.getByRole('checkbox', { name: `Toggle ${todoList[0].title}` }),
     );
 
     await waitFor(() => {
@@ -113,7 +113,7 @@ describe('<App />', () => {
     expect(
       screen.getByRole<HTMLInputElement>('checkbox', {
         name: `Toggle ${todoList[0].title}`,
-      }).checked
+      }).checked,
     ).toBe(!todoList[0].completed);
   });
 
@@ -134,7 +134,7 @@ describe('<App />', () => {
     user.dblClick(screen.getByText(todoList[0].title));
     user.type(
       screen.getByRole('textbox', { name: `Edit ${todoList[0].title}` }),
-      `${todo.title}{enter}`
+      `${todo.title}{enter}`,
     );
 
     await waitFor(() => {
@@ -155,7 +155,7 @@ describe('<App />', () => {
     });
 
     user.click(
-      screen.getByRole('button', { name: `Remove ${todoList[1].title}` })
+      screen.getByRole('button', { name: `Remove ${todoList[1].title}` }),
     );
 
     await waitFor(() => {
@@ -173,7 +173,7 @@ describe('<App />', () => {
       /* eslint-disable @typescript-eslint/no-non-null-assertion */
       const matches = regex.exec(url.pathname)!;
       const todo = todoList.find(
-        (todo) => todo.id === Number(matches.groups!.id)
+        (todo) => todo.id === Number(matches.groups!.id),
       )!;
 
       return {
@@ -202,8 +202,8 @@ describe('<App />', () => {
         (todo) =>
           screen.getByRole<HTMLInputElement>('checkbox', {
             name: `Toggle ${todo.title}`,
-          }).checked === completed
-      )
+          }).checked === completed,
+      ),
     ).toBe(true);
   });
 
@@ -227,7 +227,7 @@ describe('<App />', () => {
     expect(
       todoList
         .filter(({ completed }) => completed)
-        .every((todo) => !document.contains(screen.queryByText(todo.title)))
+        .every((todo) => !document.contains(screen.queryByText(todo.title))),
     ).toBe(true);
   });
 });

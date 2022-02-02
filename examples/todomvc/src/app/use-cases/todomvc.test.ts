@@ -33,7 +33,7 @@ describe('TodoMVC reducer', () => {
   });
   const listState: TodoMvcState = adapter.setMany(
     { ...initialState, status: 'idle' },
-    todoList
+    todoList,
   );
 
   beforeEach(() => {
@@ -225,7 +225,7 @@ describe('TodoMVC reducer', () => {
       /* eslint-disable @typescript-eslint/no-non-null-assertion */
       const matches = regex.exec(url.pathname)!;
       const todo = todoList.find(
-        (todo) => todo.id === Number(matches.groups!.id)
+        (todo) => todo.id === Number(matches.groups!.id),
       )!;
 
       return {
@@ -249,7 +249,7 @@ describe('TodoMVC reducer', () => {
     await Promise.all(
       dispatch.mock.calls
         .flat<AppThunk<Promise<unknown>>[][]>()
-        .map(async (update) => update(dispatch2, getState, extraArgument))
+        .map(async (update) => update(dispatch2, getState, extraArgument)),
     );
 
     expect(mock).toFetchTimes(todoList.length);
@@ -261,7 +261,7 @@ describe('TodoMVC reducer', () => {
     expect(
       selectors
         .all({ todomvc: finalState })
-        .every((todo) => todo.completed === completed)
+        .every((todo) => todo.completed === completed),
     ).toBe(true);
   });
 
@@ -281,7 +281,7 @@ describe('TodoMVC reducer', () => {
     await Promise.all(
       dispatch.mock.calls
         .flat<AppThunk<Promise<unknown>>[][]>()
-        .map(async (update) => update(dispatch2, getState, extraArgument))
+        .map(async (update) => update(dispatch2, getState, extraArgument)),
     );
 
     expect(mock).toFetchTimes(completedCount);
@@ -292,7 +292,7 @@ describe('TodoMVC reducer', () => {
 
     expect(selectors.counter({ todomvc: finalState })).toHaveProperty(
       'completedCount',
-      0
+      0,
     );
   });
 
@@ -308,7 +308,7 @@ describe('TodoMVC reducer', () => {
 
     expect(reducer(listState, changeFilterAction)).toHaveProperty(
       'filter',
-      Filter.ACTIVE_TODOS
+      Filter.ACTIVE_TODOS,
     );
   });
 

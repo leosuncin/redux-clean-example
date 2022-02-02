@@ -59,7 +59,7 @@ describe('counter reducer', () => {
     thunks.incrementIfOdd(2)(
       dispatch,
       () => ({ counter: initialState }),
-      extraArgument
+      extraArgument,
     );
 
     expect(dispatch).not.toHaveBeenCalled();
@@ -72,7 +72,7 @@ describe('counter reducer', () => {
           status: 'idle',
         },
       }),
-      extraArgument
+      extraArgument,
     );
 
     expect(dispatch).toHaveBeenCalledTimes(1);

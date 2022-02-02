@@ -56,7 +56,7 @@ export const thunks = {
       const { data } = await extra.counterApi.fetchCount(amount);
 
       return data;
-    }
+    },
   ),
   incrementIfOdd(amount: number): AppThunk<void> {
     return (dispatch, getState) => {

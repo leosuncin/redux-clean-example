@@ -74,13 +74,13 @@ export const { actions, name, reducer } = createSlice({
         (action) => action.type.endsWith('pending'),
         (state) => {
           state.status = 'loading';
-        }
+        },
       )
       .addMatcher(
         (action) => action.type.endsWith('rejected'),
         (state) => {
           state.status = 'failed';
-        }
+        },
       );
   },
 });
@@ -94,7 +94,7 @@ export const selectors = {
   counter: createSelector(todoSelectors.selectAll, (todos) => {
     const activeTodoCount = todos.reduce(
       (accum, todo) => (todo.completed ? accum : accum + 1),
-      0
+      0,
     );
     const completedCount = todos.length - activeTodoCount;
 
@@ -114,25 +114,25 @@ export const selectors = {
             return true;
         }
       });
-    }
+    },
   ),
 };
 
 export const thunks = {
   fetchTodoList: createAsyncThunk<Todo[], undefined, AsyncThunkConfig>(
     ``,
-    async (_, { extra, signal }) => extra.todoApi.listTodo(signal)
+    async (_, { extra, signal }) => extra.todoApi.listTodo(signal),
   ),
   addTodo: createAsyncThunk<Todo, CreateTodo, AsyncThunkConfig>(
     `${name}/addTodo`,
-    async (newTodo, { extra }) => extra.todoApi.createTodo(newTodo)
+    async (newTodo, { extra }) => extra.todoApi.createTodo(newTodo),
   ),
   toggleAll(completed: boolean): AppThunk<Promise<unknown[]>> {
     return (dispatch, getState) => {
       const todos = todoSelectors.selectAll(getState());
 
       return Promise.all(
-        todos.map((todo) => dispatch(thunks.update({ ...todo, completed })))
+        todos.map((todo) => dispatch(thunks.update({ ...todo, completed }))),
       );
     };
   },
@@ -146,11 +146,11 @@ export const thunks = {
         ...todo,
         completed: !todo?.completed,
       });
-    }
+    },
   ),
   destroy: createAsyncThunk<unknown, Todo['id'], AsyncThunkConfig>(
     `${name}/destroy`,
-    async (todoId, { extra }) => extra.todoApi.deleteTodo(todoId)
+    async (todoId, { extra }) => extra.todoApi.deleteTodo(todoId),
   ),
   update: createAsyncThunk<
     Todo,
@@ -169,7 +169,7 @@ export const thunks = {
       return Promise.all(
         todos
           .filter((todo) => todo.completed)
-          .map((todo) => dispatch(thunks.destroy(todo.id)))
+          .map((todo) => dispatch(thunks.destroy(todo.id))),
       );
     };
   },

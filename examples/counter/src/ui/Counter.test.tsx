@@ -38,7 +38,7 @@ describe('<Counter />', () => {
 
     user.type(
       screen.getByRole('textbox', { name: 'Set increment amount' }),
-      '{selectall}4'
+      '{selectall}4',
     );
     user.click(screen.getByRole('button', { name: 'Add Amount' }));
 
@@ -52,7 +52,7 @@ describe('<Counter />', () => {
 
     user.type(
       screen.getByRole('textbox', { name: 'Set increment amount' }),
-      '{selectall}42'
+      '{selectall}42',
     );
     user.click(screen.getByRole('button', { name: 'Add Async' }));
 
