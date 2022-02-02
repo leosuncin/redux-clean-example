@@ -1,6 +1,9 @@
 # 🔬 Redux Clean Architecture Examples
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+![Prettier Format](https://img.shields.io/badge/Prettier-Format-informational.svg)
+![PNPM Package Manager](https://img.shields.io/badge/PNPM-Package%20Manager-informational.svg)
+![CommitLint: Config Conventional](https://img.shields.io/badge/Commitlint-Config%20Conventional-informational.svg)
 
 > Experiments to test redux-clean-architecture library
 
