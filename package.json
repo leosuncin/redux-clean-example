@@ -3,10 +3,18 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm run --recursive --parallel dev",
     "build": "pnpm run --recursive --parallel build",
-    "preview": "pnpm run --recursive --parallel preview"
+    "dev": "pnpm run --recursive --parallel dev",
+    "lint": "pnpm run --recursive lint",
+    "prepare": "husky install",
+    "preview": "pnpm run --recursive --parallel preview",
+    "test": "pnpm run --recursive --parallel test"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@commitlint/cli": "^16.0.0",
+    "@commitlint/config-conventional": "^16.0.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.0.0",
+    "prettier": "^2.5.0"
+  }
 }
