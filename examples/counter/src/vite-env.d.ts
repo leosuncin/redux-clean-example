@@ -1,2 +1,2 @@
-/* eslint-disable spaced-comment, @typescript-eslint/consistent-type-definitions */
+/* eslint-disable spaced-comment */
 /// <reference types="vite/client" />

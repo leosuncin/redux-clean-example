@@ -17,7 +17,9 @@ function Counter() {
           type="button"
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => counterThunks.decrement()}
+          onClick={() => {
+            counterThunks.decrement();
+          }}
         >
           -
         </button>
@@ -26,7 +28,9 @@ function Counter() {
           type="button"
           className={styles.button}
           aria-label="Increment value"
-          onClick={() => counterThunks.increment()}
+          onClick={() => {
+            counterThunks.increment();
+          }}
         >
           +
         </button>
@@ -43,7 +47,9 @@ function Counter() {
         <button
           type="button"
           className={styles.button}
-          onClick={() => counterThunks.incrementByAmount(incrementValue)}
+          onClick={() => {
+            counterThunks.incrementByAmount(incrementValue);
+          }}
         >
           Add Amount
         </button>
@@ -57,7 +63,9 @@ function Counter() {
         <button
           type="button"
           className={styles.button}
-          onClick={() => counterThunks.incrementIfOdd(incrementValue)}
+          onClick={() => {
+            counterThunks.incrementIfOdd(incrementValue);
+          }}
         >
           Add If Odd
         </button>

@@ -58,7 +58,7 @@ export const thunks = {
       return data;
     }
   ),
-  incrementIfOdd(amount: number): AppThunk {
+  incrementIfOdd(amount: number): AppThunk<void> {
     return (dispatch, getState) => {
       const currentValue = selectors.count(getState());
 
@@ -67,17 +67,17 @@ export const thunks = {
       }
     };
   },
-  increment(): AppThunk {
+  increment(): AppThunk<void> {
     return (dispatch) => {
       dispatch(actions.increment());
     };
   },
-  decrement(): AppThunk {
+  decrement(): AppThunk<void> {
     return (dispatch) => {
       dispatch(actions.decrement());
     };
   },
-  incrementByAmount(amount: number): AppThunk {
+  incrementByAmount(amount: number): AppThunk<void> {
     return (dispatch) => {
       dispatch(actions.incrementByAmount(amount));
     };
