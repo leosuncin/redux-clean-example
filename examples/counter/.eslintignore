@@ -1,0 +1,6 @@
+node_modules/
+coverage/
+dist/
+dist-ssr/
+# temporary fix until fix tsconfig.json
+vite.config.ts
