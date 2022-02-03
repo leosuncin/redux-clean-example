@@ -46,7 +46,7 @@ describe('<SettingsPage />', () => {
     render(<SettingsPage />, { store, initialEntries: ['/settings', '/'] });
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Your Settings'
+      'Your Settings',
     );
   });
 
@@ -78,21 +78,21 @@ describe('<SettingsPage />', () => {
 
     user.type(
       screen.getByRole('textbox', { name: 'URL of profile picture' }),
-      data.image
+      data.image,
     );
     user.type(
       screen.getByRole('textbox', { name: 'Short bio about you' }),
-      data.bio
+      data.bio,
     );
     user.click(screen.getByRole('button', { name: /update settings/iu }));
 
     expect(
-      screen.getByRole('button', { name: /update settings/iu })
+      screen.getByRole('button', { name: /update settings/iu }),
     ).toBeDisabled();
 
     await waitFor(() => {
       expect(
-        screen.getByRole('button', { name: /update settings/iu })
+        screen.getByRole('button', { name: /update settings/iu }),
       ).not.toBeDisabled();
     });
 
@@ -122,11 +122,11 @@ describe('<SettingsPage />', () => {
           element={<ProtectedRoute element={<SettingsPage />} />}
         />
       </Routes>,
-      { store, initialEntries: ['/settings'] }
+      { store, initialEntries: ['/settings'] },
     );
 
     user.click(
-      screen.getByRole('button', { name: /or click here to logout/iu })
+      screen.getByRole('button', { name: /or click here to logout/iu }),
     );
 
     expect(store.getState().auth).not.toHaveProperty('user');

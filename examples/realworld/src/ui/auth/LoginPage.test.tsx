@@ -29,7 +29,7 @@ describe('<LoginPage />', () => {
     render(<LoginPage />);
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Sign In'
+      'Sign In',
     );
   });
 
@@ -48,7 +48,7 @@ describe('<LoginPage />', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByRole('button', { name: /Sign in/iu })
+        screen.getByRole('button', { name: /Sign in/iu }),
       ).not.toBeDisabled();
     });
 

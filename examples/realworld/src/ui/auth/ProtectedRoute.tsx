@@ -3,7 +3,7 @@ import { type Location, useLocation, Navigate } from 'react-router-dom';
 import { selectors, useAppSelector } from '~/ui/hooks';
 
 function hasRedirectTo(
-  state: unknown
+  state: unknown,
 ): state is { [key: string]: unknown; redirectTo: Location } {
   return state !== null && typeof state === 'object' && 'redirectTo' in state;
 }

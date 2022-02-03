@@ -17,5 +17,5 @@ render(
       </Router>
     </Provider>
   </StrictMode>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

@@ -46,7 +46,7 @@ export const { actions, name, reducer } = createSlice({
         (action): action is PendingAction => pendingRegex.test(action.type),
         (state, action) => {
           state.status = action.meta.requestStatus;
-        }
+        },
       )
       .addMatcher(
         (action): action is FulfilledAction => fulfilledRegex.test(action.type),
@@ -55,14 +55,14 @@ export const { actions, name, reducer } = createSlice({
           state.token = action.payload.token;
           state.user = action.payload.user;
           delete state.errors;
-        }
+        },
       )
       .addMatcher(
         (action): action is RejectedAction => rejectedRegex.test(action.type),
         (state, action) => {
           state.status = action.meta.requestStatus;
           state.errors = action.error.errors;
-        }
+        },
       );
   },
 });
@@ -85,21 +85,21 @@ export const thunks = {
   register: createAsyncThunk<AuthReturned, Register, AsyncThunkConfig>(
     `${name}/register`,
     async (payload, { extra }) => extra.auth.register(payload),
-    { serializeError }
+    { serializeError },
   ),
   login: createAsyncThunk<AuthReturned, Login, AsyncThunkConfig>(
     `${name}/login`,
     async (payload, { extra }) => extra.auth.login(payload),
-    { serializeError }
+    { serializeError },
   ),
   getUser: createAsyncThunk<AuthReturned, never, AsyncThunkConfig>(
     `${name}/getUser`,
-    async (_, { extra }) => extra.auth.getUser()
+    async (_, { extra }) => extra.auth.getUser(),
   ),
   updateUser: createAsyncThunk<AuthReturned, UpdateUser, AsyncThunkConfig>(
     `${name}/updateUser`,
     async (payload, { extra }) => extra.auth.updateUser(payload),
-    { serializeError }
+    { serializeError },
   ),
   logout(): AppThunk<ReturnType<typeof actions['logout']>> {
     return (dispatch) => dispatch(actions.logout());

@@ -17,7 +17,7 @@ function customRender(
     initialEntries,
     initialIndex,
     ...options
-  }: CustomRenderOptions = {}
+  }: CustomRenderOptions = {},
 ) {
   return render(
     <Provider store={store}>
@@ -25,7 +25,7 @@ function customRender(
         {ui}
       </MemoryRouter>
     </Provider>,
-    options
+    options,
   );
 }
 

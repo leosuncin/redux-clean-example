@@ -8,7 +8,7 @@ function ListErrors({ errors }: ListErrorsProps) {
   }
 
   const errorMessages = Object.entries(errors).flatMap(([property, messages]) =>
-    messages.map((message) => `${property} ${message}`)
+    messages.map((message) => `${property} ${message}`),
   );
 
   return (

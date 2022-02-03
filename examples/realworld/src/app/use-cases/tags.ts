@@ -36,6 +36,6 @@ export const selectors = {
 export const thunks = {
   getAll: createAsyncThunk<string[], undefined, AsyncThunkConfig>(
     `${name}/getAll`,
-    async (_, { extra, signal }) => extra.tags.getAll(signal)
+    async (_, { extra, signal }) => extra.tags.getAll(signal),
   ),
 };

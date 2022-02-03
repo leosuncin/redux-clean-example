@@ -24,7 +24,7 @@ const server = setupServer(
   registerHandler,
   loginHandler,
   getUserHandler,
-  updateUserHandler
+  updateUserHandler,
 );
 
 describe('Auth reducer', () => {

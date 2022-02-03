@@ -70,15 +70,15 @@ export const registerHandler = rest.post<{ user: Register }>(
       return response(
         context.status(422),
         context.json({ errors }),
-        context.delay()
+        context.delay(),
       );
     }
 
     return response(
       context.json({ user: { ...user, token } }),
-      context.delay()
+      context.delay(),
     );
-  }
+  },
 );
 
 export const loginHandler = rest.post<{ user: Login }>(
@@ -102,7 +102,7 @@ export const loginHandler = rest.post<{ user: Login }>(
       return response(
         context.status(422),
         context.json({ errors }),
-        context.delay()
+        context.delay(),
       );
     }
 
@@ -118,7 +118,7 @@ export const loginHandler = rest.post<{ user: Login }>(
             'email or password': ['is invalid'],
           },
         }),
-        context.delay()
+        context.delay(),
       );
     }
 
@@ -126,9 +126,9 @@ export const loginHandler = rest.post<{ user: Login }>(
 
     return response(
       context.json({ user: { ...user, token } }),
-      context.delay()
+      context.delay(),
     );
-  }
+  },
 );
 
 export const getUserHandler = rest.get(
@@ -152,9 +152,9 @@ export const getUserHandler = rest.get(
 
     return response(
       context.json({ user: { ...user, token: generateToken(user.username) } }),
-      context.delay()
+      context.delay(),
     );
-  }
+  },
 );
 
 export const updateUserHandler = rest.put<{ user: UpdateUser }>(
@@ -183,7 +183,7 @@ export const updateUserHandler = rest.put<{ user: UpdateUser }>(
       return response(
         context.status(422),
         context.json({ errors }),
-        context.delay()
+        context.delay(),
       );
     }
 
@@ -198,7 +198,7 @@ export const updateUserHandler = rest.put<{ user: UpdateUser }>(
 
     return response(
       context.json({ user: { ...user, token: generateToken(user.username) } }),
-      context.delay()
+      context.delay(),
     );
-  }
+  },
 );

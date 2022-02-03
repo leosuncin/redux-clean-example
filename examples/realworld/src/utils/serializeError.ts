@@ -1,15 +1,15 @@
-import type { SerializedError } from "@reduxjs/toolkit";
+import type { SerializedError } from '@reduxjs/toolkit';
 
 export type SerializedValidationError = SerializedError & {
   errors?: Record<string, string[]>;
 };
 
 export class ValidationError extends Error {
-  public readonly name = "ValidationError";
+  public readonly name = 'ValidationError';
 
   public constructor(
     public readonly message: string,
-    public readonly errors: Record<string, string[]>
+    public readonly errors: Record<string, string[]>,
   ) {
     super(message);
 

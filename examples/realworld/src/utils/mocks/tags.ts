@@ -9,5 +9,5 @@ export const getAllHandler = rest.get<never, TagsResponse>(
     const tags = db.tag.getAll().map(({ name }) => name);
 
     return response(context.json({ tags }), context.delay());
-  }
+  },
 );

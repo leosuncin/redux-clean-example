@@ -29,7 +29,7 @@ describe('<RegisterPage />', () => {
     render(<RegisterPage />);
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Sign Up'
+      'Sign Up',
     );
   });
 
@@ -43,7 +43,7 @@ describe('<RegisterPage />', () => {
 
     user.type(
       screen.getByRole('textbox', { name: /username/iu }),
-      data.username
+      data.username,
     );
     user.type(screen.getByRole('textbox', { name: /email/iu }), data.email);
     user.type(screen.getByPlaceholderText(/password/iu), data.password);
@@ -53,7 +53,7 @@ describe('<RegisterPage />', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByRole('button', { name: /sign up/iu })
+        screen.getByRole('button', { name: /sign up/iu }),
       ).not.toBeDisabled();
     });
 
@@ -71,7 +71,7 @@ describe('<RegisterPage />', () => {
 
     user.type(
       screen.getByRole('textbox', { name: /username/iu }),
-      data.username
+      data.username,
     );
     user.type(screen.getByRole('textbox', { name: /email/iu }), data.email);
     user.type(screen.getByPlaceholderText(/password/iu), data.password);
